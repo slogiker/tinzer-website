@@ -1,2 +1,2 @@
 # tinzer-website
-Spletna za podjetje Tinzer - KIDS 2026
+Spletna podjetja Tinzer - KIDS 2026
