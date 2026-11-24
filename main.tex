@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[slovene]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{setspace}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue}
+\setstretch{1.15}
+
+\newcommand{\slika}[3]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+      \includegraphics[width=0.9\textwidth]{#1}%
+    }{%
+      \fbox{\parbox{0.85\textwidth}{\centering\vspace{3cm}Manjka slika: \texttt{#1}\vspace{3cm}}}%
+    }
+    \caption{#2}
+    \label{#3}
+  \end{figure}
+}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Large Pregled obstoječih rešitev\par}
+\vspace{1cm}
+{\Huge\bfseries Tinzer\par}
+\vspace{0.5cm}
+{\large Spletna igralnica z virtualnim denarjem\par}
+\vspace{3cm}
+{\large Člani skupine:\par}
+\vspace{0.4cm}
+{\large Tin Žinko\\ Daniel Pliberšek\par}
+\vfill
+
+\end{titlepage}
+
+\section{Uvod}
+Tinzer je spletna aplikacija, ki posnema delovanje spletne igralnice, vendar uporablja izključno virtualni denar. Uporabnik se registrira in prijavi, dobi virtualno stanje in ga lahko stavi v treh igrah: Mines (mreža 5\,$\times$\,5), Balloon in Cards. Rezultati in podatki uporabnikov se shranjujejo, uporabniki pa se med seboj primerjajo na lestvici najboljših (leaderboard). Aplikacijo smo razvili kot maturitetni projekt.
+
+Problem, ki ga rešujemo, je, da si človek igre v slogu igralnice ne more preizkusiti brez tveganja. Podobne platforme običajno delujejo z dvema vrstama virtualnih kovancev ali pa s pravim denarjem v kriptovalutah. Tinzer želi ponuditi preprosto izkušnjo, kjer se igra samo z virtualnim denarjem.
+
+Za pregled smo izbrali tri platforme, ki so Tinzerju najbolj podobne: Stake.us \cite{stakeus}, Shuffle.us \cite{shuffleus} in BC.Game \cite{bcgame}. Stake.us in Shuffle.us sta družbeni igralnici (social casinos), ki uporabljata virtualne kovance, BC.Game pa je kripto igralnica, ki uporablja pravi denar. Vse tri imajo lastne igre, med njimi Mines. Pri vsaki navajamo kratek opis, ključne funkcionalnosti, prednosti in slabosti ter posnetek zaslona.
+
+% ---------------- PREGLED ----------------
+\section{Pregled obstoječih rešitev}
+
+\subsection{Stake.us}
+\paragraph{Kratek opis.} Stake.us je družbena igralnica, kjer se igra z virtualnima valutama Gold Coins (GC) in Stake Cash (SC) \cite{stakeus}. Znana je po lastnih igrah, imenovanih Stake Originals \cite{stakeus}.
+
+\paragraph{Ključne funkcionalnosti.}
+\begin{itemize}[nosep]
+  \item zbirka lastnih iger Stake Originals, ki vključuje Mines, Diamonds, Limbo, Crash in Dice \cite{stakeus},
+  \item igra Mines, ki jo navdihuje Minesweeper, z nastavljivimi nastavitvami, RTP 99\,\% in preverljivo pošteno delovanje (provably fair) \cite{stakeus},
+  \item registracijski bonus v obliki virtualnih kovancev \cite{stakeus}.
+\end{itemize}
+
+\paragraph{Prednosti.} Igra Mines je zelo podobna igri v Tinzerju in ima jasna pravila. Preverljiva poštenost pomeni, da lahko uporabnik rezultate preveri sam \cite{stakeus}. Platforma ponuja tudi več drugih hitrih iger iz iste zbirke \cite{stakeus}.
+
+\paragraph{Slabosti.} Viri navajajo, da je igra Mines na voljo samo na Stake.us \cite{stakeus}. Po naši oceni je sistem z dvema valutama (GC in SC) za začetnika manj pregleden kot ena sama virtualna valuta. V opisu iger, ki smo ga pregledali, nismo našli igre, podobne igri Balloon.
+
+\slika{slike/stakeus-mines.png}{Igra Mines na platformi Stake.us (vir: lasten posnetek zaslona).}{fig:stakeus-mines}
+
+\subsection{Shuffle.us}
+\paragraph{Kratek opis.} Shuffle.us je družbena igralnica, ki uporablja Gold Coins in Shuffle Cash (SC) \cite{shuffleus}. Avtor pregleda jo primerja s Stake.us in poudarja, da sta si zelo podobni \cite{shuffleus}.
+
+\paragraph{Ključne funkcionalnosti.}
+\begin{itemize}[nosep]
+  \item lastne igre Shuffle Originals, med njimi Mines, Plinko, Limbo, Towers, Dice in Hilo \cite{shuffleus},
+  \item preverljivo poštena igra pri Originals igrah \cite{shuffleus},
+  \item začetni paket brez nakupa in brezplačni Gold Coins vsakih 6 ur (2500 na prevzem, do 10\,000 na dan) \cite{shuffleus},
+  \item dnevna lestvica (race) brez vstopnine in z visokim nagradnim skladom \cite{shuffleus}.
+\end{itemize}
+
+\paragraph{Prednosti.} Uporabnik lahko začne igrati brez nakupa, brezplačne kovance pa dobiva redno \cite{shuffleus}. Platforma ima več iger, ki so podobne Tinzerjevim, med njimi Mines in kartaško igro Hilo, ter lestvico igralcev \cite{shuffleus}.
+
+\paragraph{Slabosti.} Po naši oceni je sistem z dvema valutama tudi tukaj bolj zapleten. Med igrami, ki jih navaja vir, ni igre, podobne igri Balloon, razen običajne igre Crash \cite{shuffleus}. Lestvica je razvrščena po vrednosti kovancev, zato bi lahko vzpodbujala večjo porabo, kar je naša ocena.
+
+\slika{slike/shuffleus-mines.png}{Igra Mines na platformi Shuffle.us (vir: lasten posnetek zaslona).}{fig:shuffleus-mines}
+
+\subsection{BC.Game}
+\paragraph{Kratek opis.} BC.Game je kripto igralnica, ki sprejema kripto in fiat plačila ter ima po navedbah vira več kot 7000 iger in športne stave \cite{bcgame}. Igra Mines je BC Original, kar pomeni, da je na voljo samo pri BC.Game \cite{bcgame}.
+
+\paragraph{Ključne funkcionalnosti.}
+\begin{itemize}[nosep]
+  \item igra Mines na mreži 5\,$\times$\,5, kjer igralec pred rundo izbere število min (od 1 do 24) in lahko po vsakem najdenem dragulju zahteva izplačilo \cite{bcgame},
+  \item RTP 98\,\% in preverljivo poštena igra (provably fair) \cite{bcgame},
+  \item samodejno stavljenje za določeno število rund z omejitvama dobička in izgube (profit and loss stops) \cite{bcgame},
+  \item druge lastne igre, med njimi Limbo, Crash in Hash Dice \cite{bcgame}.
+\end{itemize}
+
+\paragraph{Prednosti.} Igra Mines je zelo podobna Tinzerjevi in ima nastavljivo volatilnost, saj število min določa tveganje in višino množitelja \cite{bcgame}. Vmesnik je minimalističen in primeren tudi za mobilne naprave \cite{bcgame}. Igra je preverljivo poštena, RTP pa je višji od povprečja drugih iger na platformi \cite{bcgame}.
+
+\paragraph{Slabosti.} Vir navaja, da igra nima posebnih bonus funkcij in da platforma nima mobilnih aplikacij \cite{bcgame}. Igra se z denarjem v kriptovalutah \cite{bcgame}, kar je po naši oceni večje tveganje kot pri virtualnem denarju. Med igrami, ki jih vir opisuje, ni kartaške igre ali igre, podobne igri Balloon.
+
+\slika{slike/bcgame-mines.png}{Igra Mines na platformi BC.Game (vir: lasten posnetek zaslona).}{fig:bcgame-mines}
+
+% ---------------- ZAKLJUČEK ----------------
+\section{Zaključek}
+\paragraph{Kaj bomo prevzeli.} Od vseh treh platform bomo prevzeli zasnovo preprostih lastnih iger s stavo in množiteljem, ki jih je mogoče hitro razumeti \cite{stakeus,shuffleus,bcgame}. Igro Mines na mreži 5\,$\times$\,5 imajo vse tri platforme \cite{stakeus,shuffleus,bcgame}, pri BC.Game pa nam je všeč možnost izbire števila min in izplačila po vsakem dragulju \cite{bcgame}. Kartaško igro v slogu Hilo ima Shuffle.us \cite{shuffleus}. Od Shuffle.us prevzamemo tudi idejo lestvice igralcev \cite{shuffleus}.
+
+\paragraph{Kaj bo Tinzer naredil drugače.}
+\begin{itemize}
+  \item \textbf{Samo ena valuta, samo virtualni denar.} Stake.us in Shuffle.us uporabljata dve vrsti kovancev \cite{stakeus,shuffleus}, BC.Game pa denar v kriptovalutah \cite{bcgame}. Tinzer uporablja samo virtualni denar.
+  \item \textbf{Igra Balloon.} Pri nobeni od pregledanih platform v opisanih zbirkah ni igre, ki bi bila neposredno podobna Balloonu \cite{stakeus,shuffleus,bcgame}. Tinzer jo vključuje kot eno od svojih treh iger.
+  \item \textbf{Manjši, pregleden obseg.} BC.Game ima več kot 7000 iger \cite{bcgame}, Tinzer pa samo tri, vendar so vse povezane z enim uporabniškim računom, shranjenimi rezultati in lestvico.
+\end{itemize}
+
+% ---------------- VIRI ----------------
+\begin{thebibliography}{9}
+
+\bibitem{stakeus} SportsGrid, \emph{Stake.us Mines}. \url{https://www.sportsgrid.com/social-casinos/stake-us-mines-strategy}
+
+\bibitem{shuffleus} Casino.org, \emph{Shuffle.us Casino Review}. \url{https://www.casino.org/us/sweepstakes-casinos/shuffle-us/}
+
+\bibitem{bcgame} CoinStats, \emph{BC.Game Mines Guide \& Strategies for 2026}. \url{https://coinstats.app/crypto-casino-games/bc-game/mines/}
+
+\end{thebibliography}
+
+\end{document}
